@@ -1,0 +1,111 @@
+function setup() {
+  createCanvas(500, 500);
+  ellipseMode(CENTER);
+}
+
+let centerX = 250;
+let centerY = 250;
+let earthAngle = 0;
+let moonAngle = 0;
+let a = 200;
+let b = 160;
+let x1, y1, x2, y2;
+
+function draw() {
+  background(220);
+  drawTrack();
+  drawEarth();
+}
+
+function drawTrack() {
+  // draw the ellipse track
+  push();
+  stroke(color(0)); // red track
+  noFill();
+  ellipse(centerX, centerY, 2 * a, 2 * b);
+  stroke(color(100));
+  strokeWeight(3);
+  line(centerX-a, centerY, centerX+a, centerY);//horizontal line
+  pop();
+
+  // draw the center and the circular track
+  noStroke();
+  fill(255);
+  ellipse(centerX, centerY, 8, 8);
+}
+
+function drawEarth() {
+  let mouseDist = dist(mouseX, mouseY, centerX, centerY);
+  let distRatio = (mouseY-centerY)/mouseDist
+  let earthAngle = asin(distRatio);
+  let rEarth = a * b / sqrt(sq(b * cos(earthAngle)) + sq(a * sin(earthAngle)));
+  x1 = rEarth * cos(earthAngle);
+  y1 = rEarth * sin(earthAngle);
+
+  translate(centerX, centerY);
+  if (mouseX<centerX) {
+    x1= x1*-1
+  }
+
+// earth ellipse
+  fill(85, 123, 250, 200);
+  ellipse(x1, y1, 35, 35);
+
+
+
+
+// dark blue triangle
+  stroke(color(26, 61, 165));
+  strokeWeight(1);
+  noFill();
+  triangle(0, 0, mouseX-centerX, mouseY-centerY, mouseX-centerX, 0);
+
+// c1
+  push();
+  translate((mouseX-centerX)/2, (mouseY-centerY)/2);
+  rotate(atan2(mouseY-centerY, mouseX-centerX));
+  let c1 = int(mouseDist);
+  text('c1: ' + c1, 0, -5);
+  pop();
+
+// a1
+  push();
+  translate(mouseX-centerX, (mouseY-centerY)/2);
+  rotate(PI/2);
+  let a1 = int(centerY-mouseY);
+  if (a1<0) {
+    a1 = a1*-1
+  }
+  text('a1: ' + a1, 0, -5);
+  pop();
+
+
+  // light blue triangle
+  stroke(color(128, 246, 208  , 80));
+  strokeWeight(7);
+  noFill();
+  triangle(0, 0, x1, y1, x1, 0);
+  strokeWeight(1);
+
+// c2
+  push();
+  stroke(color(109, 199, 170));
+  translate((x1)/2, (y1)/2);
+  rotate(atan2(y1, x1));
+  let c2 = int(rEarth);
+  text('c2: ' + c2, -10, 15);
+  pop();
+
+// a2
+  push();
+  stroke(color(109, 199, 170));
+  translate(x1, y1/2);
+  rotate(PI/2);
+  let a2 = int(centerY-mouseY);
+  if (a2<0) {
+    a2 = a2*-1
+  }
+  text('a2: ' + a2, 0, -5);
+  pop();
+
+}
