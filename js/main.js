@@ -1,6 +1,23 @@
+let cnv;
+let opposite1;
+let opposite2;
+let hypotenuse1;
+let hypotenuse2;
+
 function setup() {
-  createCanvas(500, 500);
+  cnv = createCanvas(500, 500);
+  cnv.mouseClicked(saveData);
   ellipseMode(CENTER);
+  const firebaseConfig = {
+  apiKey: "AIzaSyAz0EJaVHhTxTx8RKkWe-6Vwyxu26GQluM",
+  authDomain: "simply-triangles-data.firebaseapp.com",
+  databaseURL: "https://simply-triangles-data.firebaseio.com",
+  projectId: "simply-triangles-data",
+  storageBucket: "",
+  messagingSenderId: "907294129613",
+  appId: "1:907294129613:web:8551b430a835d4ca"
+  };
+
 }
 
 let centerX = 250;
@@ -12,7 +29,7 @@ let b = 160;
 let x1, y1, x2, y2;
 
 function draw() {
-  background(220);
+  background(240);
   drawTrack();
   drawEarth();
 }
@@ -33,6 +50,10 @@ function drawTrack() {
   fill(255);
   ellipse(centerX, centerY, 8, 8);
 }
+
+// ellipse width = 2a, height = 2b
+// (x/a)^2+(y/b)^2=1
+// x=r(θ)cosθ, y=r(θ)sinθ
 
 function drawEarth() {
   let mouseDist = dist(mouseX, mouseY, centerX, centerY);
@@ -67,6 +88,7 @@ function drawEarth() {
   let c1 = int(mouseDist);
   text('c1: ' + c1, 0, -5);
   pop();
+  hypotenuse1 = c1;
 
 // a1
   push();
@@ -78,7 +100,7 @@ function drawEarth() {
   }
   text('a1: ' + a1, 0, -5);
   pop();
-
+  opposite1 = a1;
 
   // light blue triangle
   stroke(color(128, 246, 208  , 80));
@@ -95,6 +117,7 @@ function drawEarth() {
   let c2 = int(rEarth);
   text('c2: ' + c2, -10, 15);
   pop();
+  hypotenuse2 = c2;
 
 // a2
   push();
@@ -107,5 +130,28 @@ function drawEarth() {
   }
   text('a2: ' + a2, 0, -5);
   pop();
+  opposite2 = a2;
 
+
+}
+
+
+
+let database = firebase.database();
+
+function saveData() {
+  // alert(hypotenuse1 + opposite1);
+  let uniqueKey = database.collection('lengths').doc().id;
+  database.doc('lengths/' + uniqueKey).set({
+    id: uniqueKey,
+    a1: opposite1,
+    c1: hypotenuse1,
+    ratio1: opposite1/hypotenuse1,
+    a2: opposite2,
+    c2: hypotenuse2,
+    ratio2: opposite2/hypotenuse2
+
+  });
+  // let numberEl = document.getElementById('listContent');
+  // numberEl.innerHTML = 'abc';
 }
