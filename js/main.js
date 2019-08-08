@@ -72,9 +72,6 @@ function drawEarth() {
   fill(85, 123, 250, 200);
   ellipse(x1, y1, 35, 35);
 
-
-
-
 // dark blue triangle
   stroke(color(26, 61, 165));
   strokeWeight(1);
@@ -102,7 +99,7 @@ function drawEarth() {
   pop();
   opposite1 = a1;
 
-  // light blue triangle
+// light blue triangle
   stroke(color(128, 246, 208  , 80));
   strokeWeight(7);
   noFill();
@@ -135,14 +132,12 @@ function drawEarth() {
 
 }
 
-
-
 let database = firebase.database();
 
 function saveData() {
   // alert(hypotenuse1 + opposite1);
-  let uniqueKey = database.collection('lengths').doc().id;
-  database.doc('lengths/' + uniqueKey).set({
+  let uniqueKey = database.collection('edgeLengths').doc().id;
+  database.doc('edgeLengths/' + uniqueKey).set({
     id: uniqueKey,
     a1: opposite1,
     c1: hypotenuse1,
