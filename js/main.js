@@ -17,7 +17,7 @@ function setup() {
   messagingSenderId: "907294129613",
   appId: "1:907294129613:web:8551b430a835d4ca"
   };
-
+  firebase.initializeApp(firebaseConfig);
 }
 
 let centerX = 250;
@@ -136,18 +136,26 @@ var database = firebase.database();
 
 function saveData() {
   // alert(hypotenuse1 + opposite1);
-  var edgeLengths = database.ref('edgeLengths');
-  var myKey = database.collection('edgeLengths').doc().id;
-  database.collection('edgeLengths').doc(myKey).set({
-    id: myKey,
+  // var edgeLengths = database.ref('edgeLengths');
+  // var myKey = database.collection('edgeLengths').doc().id;
+  // database.collection('edgeLengths').doc(myKey).set({
+  //   id: myKey,
+  //   a1: opposite1,
+  //   c1: hypotenuse1,
+  //   ratio1: opposite1/hypotenuse1,
+  //   a2: opposite2,
+  //   c2: hypotenuse2,
+  //   ratio2: opposite2/hypotenuse2
+  //
+  // });
+  // let numberEl = document.getElementById('listContent');
+  // numberEl.innerHTML = 'abc';
+
+  var lengths = database.ref('lengths');
+  var lengthsEl = {
     a1: opposite1,
     c1: hypotenuse1,
     ratio1: opposite1/hypotenuse1,
-    a2: opposite2,
-    c2: hypotenuse2,
-    ratio2: opposite2/hypotenuse2
-
-  });
-  // let numberEl = document.getElementById('listContent');
-  // numberEl.innerHTML = 'abc';
+  }
+  lengths.push(lengthsEl);
 }
