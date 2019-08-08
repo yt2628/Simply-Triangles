@@ -132,13 +132,14 @@ function drawEarth() {
 
 }
 
-let database = firebase.database();
+let database = firebase.firestore();
 
 function saveData() {
   // alert(hypotenuse1 + opposite1);
-  let uniqueKey = database.collection('edgeLengths').doc().id;
-  database.doc('edgeLengths/' + uniqueKey).set({
-    id: uniqueKey,
+  let edgeLengths = database.ref('edgeLengths');
+  let myKey = database.collection('edgeLengths').doc().id;
+  database.collection('edgeLengths').doc(myKey).set({
+    id: myKey,
     a1: opposite1,
     c1: hypotenuse1,
     ratio1: opposite1/hypotenuse1,
