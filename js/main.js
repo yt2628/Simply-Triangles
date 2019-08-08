@@ -123,7 +123,11 @@ function drawEarth() {
 
 }
 
-  var database = firebase.firestore();
+const firebase = require("firebase");
+// Required for side-effects
+require("firebase/firestore");
+
+var database = firebase.firestore();
 
 function saveData() {
   // alert(hypotenuse1 + opposite1);
