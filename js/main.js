@@ -8,16 +8,7 @@ function setup() {
   cnv = createCanvas(500, 500);
   cnv.mouseClicked(saveData);
   ellipseMode(CENTER);
-  const firebaseConfig = {
-  apiKey: "AIzaSyAz0EJaVHhTxTx8RKkWe-6Vwyxu26GQluM",
-  authDomain: "simply-triangles-data.firebaseapp.com",
-  databaseURL: "https://simply-triangles-data.firebaseio.com",
-  projectId: "simply-triangles-data",
-  storageBucket: "",
-  messagingSenderId: "907294129613",
-  appId: "1:907294129613:web:8551b430a835d4ca"
-  };
-  firebase.initializeApp(firebaseConfig);
+
 }
 
 let centerX = 250;
@@ -132,11 +123,23 @@ function drawEarth() {
 
 }
 
-var database = firebase.database();
+
 
 function saveData() {
   // alert(hypotenuse1 + opposite1);
-  var edgeLengths = database.ref('edgeLengths');
+  const firebaseConfig = {
+  apiKey: "AIzaSyAz0EJaVHhTxTx8RKkWe-6Vwyxu26GQluM",
+  authDomain: "simply-triangles-data.firebaseapp.com",
+  databaseURL: "https://simply-triangles-data.firebaseio.com",
+  projectId: "simply-triangles-data",
+  storageBucket: "",
+  messagingSenderId: "907294129613",
+  appId: "1:907294129613:web:8551b430a835d4ca"
+  };
+  firebase.initializeApp(firebaseConfig);
+  var database = firebase.firestore();
+
+  // var edgeLengths = database.ref('edgeLengths');
   var myKey = database.collection('edgeLengths').doc().id;
   database.collection('edgeLengths').doc(myKey).set({
     id: myKey,
