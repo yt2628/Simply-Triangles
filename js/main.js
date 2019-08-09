@@ -155,3 +155,13 @@ function saveData() {
   // }
   // lengths.push(lengthsEl);
 }
+
+// firebase.firestore() is not a function, added firestore script in html
+// followed documentation and added const firebase = require('firebase')
+// error: require is not defined
+// updated firebase, npm install -g firebase-tools
+// npm WARN optional SKIPPING OPTIONAL DEPENDENCY:
+// fsevents@2.0.7 (node_modules\firebase-tools\node_modules\fsevents):
+// npm WARN notsup SKIPPING OPTIONAL DEPENDENCY:
+// Unsupported platform for fsevents@2.0.7: wanted {"os":"darwin","arch":"any"}
+// (current: {"os":"win32","arch":"x64"})
