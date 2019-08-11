@@ -160,14 +160,26 @@ function saveData() {
   // let numberEl = document.getElementById('listContent');
   // numberEl.innerHTML = 'abc';
 
-  // var lengths = database.ref('lengths');
-  // var lengthsEl = {
-  //   a1: opposite1,
-  //   c1: hypotenuse1,
-  //   ratio1: opposite1/hypotenuse1,
-  // }
-  // lengths.push(lengthsEl);
+
+ edgeLengths.onSnapshot(function(snapshot) {
+   var lengths = [];
+   var contentHTML = "";
+
+   // forEach method
+   snapshot.forEach(function(doc) {
+     lengths.push(doc.data());
+     contentHTML += `<li>${ doc.data().ratio1 } ${ doc.data().ratio2 }</li>`
+   });
+
+   var listEl = document.getElementById('listContent');
+   listEl.innerHTML = contentHTML;
+
+   var usersList = snapshot.docs;
+ });
+
 }
+
+
 
 // firebase.firestore() is not a function, added firestore script in html
 // followed documentation and added const firebase = require('firebase')
