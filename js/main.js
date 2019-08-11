@@ -126,7 +126,7 @@ function drawEarth() {
   stroke(color(109, 199, 170));
   translate(x1, y1/2);
   rotate(PI/2);
-  let a2 = int(centerY-mouseY);
+  let a2 = int(centerY-y1);
   if (a2<0) {
     a2 = a2*-1
   }
@@ -151,10 +151,10 @@ function saveData() {
     id: myKey,
     a1: opposite1,
     c1: hypotenuse1,
-    ratio1: opposite1/hypotenuse1,
+    ratio1: nf(opposite1/hypotenuse1, 1, 2),
     a2: opposite2,
     c2: hypotenuse2,
-    ratio2: opposite2/hypotenuse2
+    ratio2: nf(opposite2/hypotenuse2, 1, 2)
 
   });
   // let numberEl = document.getElementById('listContent');
