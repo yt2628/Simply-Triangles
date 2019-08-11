@@ -4,11 +4,25 @@ let opposite2;
 let hypotenuse1;
 let hypotenuse2;
 
+var database;
+
 function setup() {
   cnv = createCanvas(500, 500);
   cnv.mouseClicked(saveData);
   ellipseMode(CENTER);
 
+  var firebaseConfig = {
+    apiKey: "AIzaSyAz0EJaVHhTxTx8RKkWe-6Vwyxu26GQluM",
+    authDomain: "simply-triangles-data.firebaseapp.com",
+    databaseURL: "https://simply-triangles-data.firebaseio.com",
+    projectId: "simply-triangles-data",
+    storageBucket: "simply-triangles-data.appspot.com",
+    messagingSenderId: "907294129613",
+    appId: "1:907294129613:web:8551b430a835d4ca"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  database = firebase.firestore();
 }
 
 let centerX = 250;
@@ -123,11 +137,10 @@ function drawEarth() {
 
 }
 
-const firebase = require("firebase");
-// Required for side-effects
-require("firebase/firestore");
+// const firebase = require("firebase");
+// // Required for side-effects
+// require("firebase/firestore");
 
-var database = firebase.firestore();
 
 function saveData() {
   // alert(hypotenuse1 + opposite1);
