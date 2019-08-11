@@ -145,8 +145,8 @@ function drawEarth() {
 function saveData() {
   // alert(hypotenuse1 + opposite1);
 
-  // var edgeLengths = database.ref('edgeLengths');
-  var myKey = database.collection('edgeLengths').doc().id;
+  var edgeLengths = database.collection('edgeLengths');
+  var myKey = edgeLengths.doc().id;
   database.collection('edgeLengths').doc(myKey).set({
     id: myKey,
     a1: opposite1,
