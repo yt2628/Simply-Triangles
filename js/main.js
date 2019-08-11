@@ -126,7 +126,7 @@ function drawEarth() {
   stroke(color(109, 199, 170));
   translate(x1, y1/2);
   rotate(PI/2);
-  let a2 = int(centerY-y1);
+  let a2 = int(y1);
   if (a2<0) {
     a2 = a2*-1
   }
